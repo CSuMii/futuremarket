@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="GoogleChorme">
     <title>產品結帳區</title>
 </head>
 <body>
-    
+    <form>
+        <center><h1>產品結帳</h1></center>
+        
+        <div class="topic">產品品名：<input></div><br>
+        <div class="topic">商品九折：<input type="text" id="price" name="price"></div> <br>
+        <div class="topic"><input type="button" value="打九折" id="total"
+        </div>
+        </form>
 </body>
+
+<script>
+    function discount() {
+        pirce = document.getElementById("price").value;
+        num = document.getElementById("num").value;
+        totals=pirce*num;
+        document.getElementById("total").value = totals;
+    }
+    </script>
+
 </html>

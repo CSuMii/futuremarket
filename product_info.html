@@ -1,11 +1,10 @@
 <style>
-    .topic{
+    .topic{ /* 文字 */
         font-size:medium;
         font-weight: bold;
         text-align: center;
     }
-
-    .mq{
+    .mq{/* 跑馬燈 */
         font-size:medium;
         font-weight: bold;
         text-align: center;
@@ -25,12 +24,13 @@
 
 </div>
 <body>
-    <form>
+    <form action="product_instock.html" name="form" id="form"　method="post">
     <center><h1>產品資訊</h1></center>
-    <div class="topic">產品品名：<input></div> <br>
-    <div class="topic">物品價格：<input></div> <br>
-    <div class="topic">物品數量：<input></div> <br>
-    <div class="topic">物品單位：<input></div> <br>
+    <div class="topic">產品品名：<input type="text" id="name"></div> <br>
+    <div class="topic">產品進價：<input type="num"  id="buyprice"></div> <br> 
+    <div class="topic">物品售價：<input type="num"  id="saleprice"></div> <br>
+    <div class="topic">物品數量：<input type="num"  id="num"></div> <br>
+    <div class="topic">物品單位：<input type="text" id="unit"></div> <br>
 
     <div class="topic">產品類別：
         <select>
@@ -97,10 +97,21 @@
             <!-- 待匯入資料表 -->
         </select>
     </div> <br>
-
-    <div class="topic"><input type="button" value="新增產品資訊" 
-         onclick="location.href='https://www.wibibi.com/info.php?tid=117'">
+    <div class="topic">
+        <input type="button" name="submit" value="新增商品" onclick="process();"> 
     </div>
     </form>
+    <script>
+        function process() {
+            const nameElement = document.getElementById('name');
+            const name = nameElement.value;
+            const buypriceElement = document.getElementById('buyprice');
+            const buyprice = buypriceElement.value;
+            const salepriceElement = document.getElementById('saleprice');
+            const saleprice = salepriceElement.value;
+            alert('產品品名：' + name + '\n產品進價：' + buyprice + '\n產品售價：' + saleprice);
+          }
+    </script>
 </body>
 </html>
+
