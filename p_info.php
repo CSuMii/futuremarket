@@ -1,14 +1,30 @@
+<style>
+    .topic{ /* 文字 */
+        font-size:medium;
+        font-weight: bold;
+        text-align: center;
+    }
+    .mq{/* 跑馬燈 */
+        font-size:medium;
+        font-weight: bold;
+        text-align: center;
+        color: brown;
+    }
+        </style>
 <?php
+echo '<div class="mq"><marquee direction="left" scrollamount="7" behavior="alternate">
+     我還沒有做完，所以很多功能還不能動~ 我有在認真練功 請不要罵我 我怕被罵 O//口//O </marquee></div>';
 
+echo '<center><h1>產品資訊</h1></center>';
 echo '<form action="p_save.php" method="post">
-請輸入產品名稱：　<input type ="text" name="name" value="">
-請輸入產品進價：　<input type ="num" name="buy" value="">
-請輸入產品售價：　<input type ="num" name="sale" value="">
-請輸入產品數量：　<input type ="num" name="num" value="">
-請輸入產品單價：　<input type ="text" name="unit" value="">
+<div class="topic">請輸入產品名稱：　<input type ="text" name="name" value=""> <br><br>
+請輸入產品進價：　<input type ="num" name="buy" value="">   <br><br>
+請輸入產品售價：　<input type ="num" name="sale" value="">  <br><br>
+請輸入產品數量：　<input type ="num" name="num" value="">   <br><br>
+請輸入產品單價：　<input type ="text" name="unit" value=""> <br><br></div>
 
-<Select name="請選擇產品類別">
-//不確定是否有資料表
+<div class="topic">產品類別：
+<Select name="cate＂>
 <select>
             <option>請選擇產品類別</option>
             <!-- 不確定是否有資料表 -->
@@ -54,19 +70,15 @@ echo '<form action="p_save.php" method="post">
         <select>
             <option>請選擇物品科別</option>
             <!-- 待匯入資料表 -->
-        </select>
+        </select>　<br><br>
 
-    進貨日期： <input type="date" id="instockdate" name="in-stock" value="0000-00-00" min="2022-01-01"> <br>
-    到期日期： <input type="date" id="expdate" name="exp-stock"    value="0000-00-00" min="2022-01-01"> <br>
-    保存天數： <select><option>請選擇保存天數</option></select><!-- 待匯入資料表 -->
-
-
+    進貨日期： <input type="date" id="instockdate" name="in-stock" value="0000-00-00" min="2022-01-01"> <br><br>
+    到期日期： <input type="date" id="expdate" name="exp-stock"    value="0000-00-00" min="2022-01-01"> <br><br>
+    保存天數： <select><option>請選擇保存天數</option></select> <br><br>
 
 <input type ="submit" value="儲存產品資料">
 </form>'
-
 ?>
-
 <script>
         function process() {
             const nameElement = document.getElementById('name');
