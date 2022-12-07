@@ -10,11 +10,17 @@
         text-align: center;
         color: brown;
     }
+    hyml,body{
+        background-color:#ABFFAB;
+    }
     </style>
 <?php
 session_start();
 header('Content-Type: text/html; charset=utf8');
 include_once("../../dbConnection.php");
+error_reporting(E_ALL & ~E_NOTICE);
+$timezone = date_default_timezone_get();
+date_default_timezone_set('Asia/Taipei');
 
 $db = new dbConnection();
 $SQLSTR= "SELECT p.name,n.resume_id,p.pid,p.zoneCode,left(n.create_date,10) from fproduct p, newinn n where p.pid=n.pid and (n.stage_id=11 or n.stage_id=12)  ";
@@ -56,6 +62,7 @@ if($fname==""){
         $_SESSION['farmID'] = $farmID;
     }
 }
+
 echo '<center><h1>產品資訊</h1></center>';
 echo '<form action="p_save.php" method="post">';
 
@@ -70,17 +77,17 @@ echo '<div class="topic">&nbsp&nbsp&nbsp&nbsp請選擇舊有的農場名稱：
         echo '</select></div> <br>';
 
 echo '<div class="topic">請輸入新加入的農場名稱：<input type ="text" name="inputfname" value=""> <br><br>
-請輸入產品名稱：　<input type ="text" name="pname" value=""> <br><br>
-請輸入產品進價：　<input type ="num" name="buydate" value="">   <br><br>
-請輸入產品售價：　<input type ="num" name="price" value="">  <br><br>
-請輸入產品數量：　<input type ="num" name="num" value="">   <br><br>
-請輸入產品單位：　<input type ="text" name="unit" value=""> <br><br></div>';    
+請輸入產品名稱：　<input type ="text" name="pname" value="" required="required" > <br><br>
+請輸入產品進價：　<input type ="num" name="buyprice" value="" required="required" >   <br><br>
+請輸入產品售價：　<input type ="num" name="price" value="" required="required" >  <br><br>
+請輸入產品數量：　<input type ="num" name="num" value="" required="required" >   <br><br>
+請輸入產品單位：　<input type ="text" name="unit" value="" required="required" > <br><br></div>';    
 
 //產品類別
 $SQLSTR= "SELECT `sort_id`, `sort_name` FROM `market_sort`"; 
 $result=$db->dbQuery($SQLSTR);
 echo '<div class="topic">產品類別：
-<select name="sort" id="sort">
+<select name="sort">
             <option value="0">請選擇產品類別</option>';
             while($rs=mysqli_fetch_row($result)){
              echo '<option value="' .$rs[0].'">' .$rs[1].'</option>';}
@@ -90,7 +97,7 @@ echo '<div class="topic">產品類別：
 $SQLSTR= "SELECT `z_id`, `z_name` FROM `zonecode`" ;
 $result=$db->dbQuery($SQLSTR);
 echo '<div class="topic" id="zonecode">分類代號：
-        <select id="zonecode">
+        <select name="zonecode">
         <option value="0">請選擇分類代號</option>';
         while($rs=mysqli_fetch_row($result)){
             echo '<option value="' .$rs[0].'">' .$rs[1].'</option>';}
@@ -106,20 +113,20 @@ echo '<div class="topic">&nbsp&nbsp&nbsp&nbsp物品科別：
         echo '<option value="' .$rs[1].'">' .$rs[1].'</option>';}
         echo '</select></div> <br>';
 
-echo '<div class="topic">進貨日期： <input type="date" id="buydate" name="in-stock" 
+echo '<div class="topic">進貨日期： <input type="date" name="buydate" 
       value="0000-00-00" min="2022-01-01"> <br><br>
-      <div class="topic">到期日期： <input type="date" id="savedate" name="exp-stock"    value="0000-00-00" min="2022-01-01"> <br><br>';
+      <div class="topic">到期日期： <input type="date" name="storagedate"    value="0000-00-00" min="2022-01-01"> <br><br>';
 
 $SQLSTR= "SELECT `s_id`, `s_name` FROM `storage`";
 $result=$db->dbQuery($SQLSTR);
-echo '<div class="topic">保存天數：<select id="deadline">
+echo '<div class="topic">保存天數：
+     <select name="deadline">
       <option value="0">請選擇保存天數</option>';
       while($rs=mysqli_fetch_row($result)){
-        echo '<option value="' .$rs[0].'">' .$rs[1].'</option>';}
+        echo '<option value="' .$rs[1].'">' .$rs[1].'</option>';}
         echo '</select></div> <br>';
 
 echo '<input type ="submit" value="儲存產品資料">
 </form>'
-
 ?>
     
